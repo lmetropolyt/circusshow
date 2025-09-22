@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PoseNet Body Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skeleton Tracking</title>
 
   <!-- p5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
 
   <!-- ml5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ml5/0.12.2/ml5.min.js"></script>
@@ -14,19 +16,20 @@
   <script src="sketch.js" defer></script>
 
   <style>
+    /* Reset default margins and padding */
     body {
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: #000;
+      height: 100vh; /* Full viewport height */
+      background-color: #000; /* Black background for visibility */
     }
 
     canvas {
       display: block;
-      z-index: 1;
+      z-index: 1; /* Ensure the canvas is above the body background */
     }
   </style>
 </head>
