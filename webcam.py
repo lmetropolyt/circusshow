@@ -57,14 +57,30 @@ while True:
     black = np.all(lizzie[:, :, :3] == [0,0,0], axis=-1)
     lizzie[black, 3] = 0
 
-    # Load cat with alpha channel
-    cat = cv2.imread('cat.png', cv2.IMREAD_UNCHANGED)  
-    cat = cv2.resize(cat, (640, 480))
+    # # Load cat with alpha channel
+    # cat = cv2.imread('cat.png', cv2.IMREAD_UNCHANGED)  
+    # cat = cv2.resize(cat, (640, 480))
 
     img = ensure_alpha_channel(img)
     lizzie = ensure_alpha_channel(lizzie)
 
-    img = background_foreground(img, cat)
+    # img = background_foreground(img, cat)
+    b, g, r, a = cv2.split(img)
+    gray = cv2.cvtColor(cv2.merge([b, g, r]), cv2.COLOR_BGR2GRAY)
+    img = cv2.merge([gray, gray, gray, a])
+
+    for point1 in lmList:
+        for point2 in lmList:
+            try:
+                start_point = point1[0:2]  # (x, y) coordinates of the starting point
+                end_point = point2[0:2] # (x, y) coordinates of the ending point
+                line_color = (0, 255, 0) # BGR color format (Green in this case)
+                line_thickness = 1      # Thickness of the line
+
+                # Draw the line on the frame
+                cv2.line(img, start_point, end_point, line_color, line_thickness)
+            finally:
+                print("", end='')
 
     img = background_foreground(img, lizzie)
 
